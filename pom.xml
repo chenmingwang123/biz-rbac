@@ -21,6 +21,10 @@
         <module>biz-rbac-api</module>
         <module>biz-rbac-service</module>
     </modules>
+
+    <properties>
+        <cciet.common.version>0.0.1-SNAPSHOT</cciet.common.version>
+    </properties>
     <!-- 依赖管理器 -->
     <dependencyManagement>
         <dependencies>
