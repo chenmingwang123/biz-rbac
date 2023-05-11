@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.cciet.dependencies</groupId>
+        <artifactId>cciet-root</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.cciet.biz.rbac</groupId>
+    <artifactId>biz-rbac</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <description>RBAC权限</description>
+    <packaging>pom</packaging>
+    <name>biz-rbac</name>
+
+    <modules>
+        <module>biz-rbac-api</module>
+        <module>biz-rbac-service</module>
+    </modules>
+    <!-- 依赖管理器 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- cciet组件依赖-->
+            <dependency>
+                <groupId>com.cciet.dependencies</groupId>
+                <artifactId>common-dependencies</artifactId>
+                <version>${cciet.common.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

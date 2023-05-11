@@ -1,0 +1,25 @@
+server:
+  port: 8002
+  servlet:
+    encoding:
+      force: true
+      charset: UTF-8
+      enabled: true
+spring:
+  application:
+    name: '@name@'
+  profiles:
+    include: doc,undertow
+    active: local
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+  servlet:
+    multipart:
+      enabled: true # 启用上传处理，默认是true
+      file-size-threshold: 10MB # 当上传文件达到1MB的时候进行磁盘写入
+      max-request-size: 1000MB # 设置最大的请求文件的大小
+      max-file-size: 500MB # 设置单个文件的最大长度
+logging:
+  level:
+    com.cciet: debug
