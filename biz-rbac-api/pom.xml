@@ -17,14 +17,9 @@
     <name>biz-rbac-api</name>
     
     <dependencies>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.cciet.common</groupId>
-            <artifactId>common-beans</artifactId>
+            <artifactId>common-interpret</artifactId>
         </dependency>
     </dependencies>
 

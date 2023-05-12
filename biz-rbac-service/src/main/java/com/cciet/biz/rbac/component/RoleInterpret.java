@@ -1,10 +1,9 @@
 package com.cciet.biz.rbac.component;
 
-import com.cciet.common.apis.interpret.ROLE;
-import com.cciet.common.bean.Result;
-import com.cciet.common.interfaces.InterpretType;
+import com.cciet.common.interpret.type.ROLE;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
@@ -17,7 +16,7 @@ import java.util.Set;
 public class RoleInterpret implements ROLE {
 
     @Override
-    public Result<Map<Object, String>> getInterpretTextApi(Set<Object> codes) {
-        return null;
+    public Map<Object, String> getInterpretText(Set<Object> codes) {
+        return Collections.emptyMap();
     }
 }

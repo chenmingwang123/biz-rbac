@@ -1,10 +1,9 @@
 package com.cciet.biz.rbac.component;
 
-import com.cciet.common.apis.interpret.USER;
-import com.cciet.common.bean.Result;
-import com.cciet.common.interfaces.InterpretType;
+import com.cciet.common.interpret.type.USER;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
@@ -17,11 +16,6 @@ import java.util.Set;
 public class UserInterpret implements USER {
     @Override
     public Map<Object, String> getInterpretText(Set<Object> codes) {
-        return null;
-    }
-
-    @Override
-    public Result<Map<Object, String>> getInterpretTextApi(Set<Object> codes) {
-        return null;
+        return Collections.emptyMap();
     }
 }

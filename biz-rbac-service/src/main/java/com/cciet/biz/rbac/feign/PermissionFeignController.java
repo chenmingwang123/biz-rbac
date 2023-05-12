@@ -3,6 +3,7 @@ package com.cciet.biz.rbac.feign;
 import com.cciet.biz.rbac.component.Permission;
 import com.cciet.common.apis.IPermissionApi;
 import com.cciet.common.bean.Result;
+import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,6 +15,7 @@ import javax.annotation.Resource;
  * @author huanghui
  * @since 2023/5/8 13:36
  */
+@Hidden
 @RestController
 @RequestMapping("/permission")
 public class PermissionFeignController implements IPermissionApi {
