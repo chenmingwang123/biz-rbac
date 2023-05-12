@@ -25,6 +25,7 @@
     <properties>
         <cciet.common.version>0.0.1-SNAPSHOT</cciet.common.version>
     </properties>
+
     <!-- 依赖管理器 -->
     <dependencyManagement>
         <dependencies>
@@ -35,6 +36,11 @@
                 <version>${cciet.common.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.cciet.biz.rbac</groupId>
+                <artifactId>biz-rbac-api</artifactId>
+                <version>${project.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
