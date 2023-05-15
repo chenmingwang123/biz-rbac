@@ -10,7 +10,7 @@ public class Generator {
     public static void main(String[] args) {
 
         String url = "jdbc:dm://127.0.0.1:15236?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF-8&localTimezone=480";
-        String username = "cciet";
+        String username = "iccet";
         String password = "1qazxsw23edc";
         // 作者
         String author = "huanghui";
