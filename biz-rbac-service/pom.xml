@@ -37,7 +37,9 @@
             <groupId>com.cciet.biz.rbac</groupId>
             <artifactId>biz-rbac-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
     </dependencies>
-
-
 </project>

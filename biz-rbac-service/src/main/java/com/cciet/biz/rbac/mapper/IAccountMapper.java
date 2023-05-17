@@ -5,12 +5,12 @@ import com.cciet.mybatis.supers.SupperMapper;
 
 /**
  * <p>
- * 用户账号 Mapper 接口
+ * 用户账号表 Mapper 接口
  * </p>
  *
- * @author huanghui
- * @since 2023/05/15 09:09
+ * @author cmw
+ * @since 2023/05/15 18:02
  */
-public interface AccountMapper extends SupperMapper<Account> {
+public interface IAccountMapper extends SupperMapper<Account> {
 
 }

@@ -9,11 +9,11 @@ import com.cciet.mybatis.CodeGenerator;
 public class Generator {
     public static void main(String[] args) {
 
-        String url = "jdbc:dm://127.0.0.1:15236?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=UTF-8&localTimezone=480";
-        String username = "iccet";
-        String password = "1qazxsw23edc";
+        String url = "jdbc:mysql://127.0.0.1:3306/rbac?characterEncoding=utf-8&useSSL=false&serverTimezone=UTC";
+        String username = "root";
+        String password = "123";
         // 作者
-        String author = "huanghui";
+        String author = "cmw";
         // 模块名称
         String moduleName = "rbac";
         // 包名称
@@ -23,10 +23,9 @@ public class Generator {
         // 表前缀
         String tablePrefix = "t_sys";
         // 生成的表列表
-        String[] tables = new String[]{"T_SYS_ACCOUNT"};
+        String[] tables = new String[]{"t_sys_account"};
         // 项目更目录
-        System.setProperty("user.dir","D:\\Workspace\\Project\\services\\cciet\\cciet-bizs\\biz-rbac\\biz-rbac-service");
-
+        System.setProperty("user.dir","D:\\javaCode\\biz-rbac\\biz-rbac-service");
 
         CodeGenerator.builder().url(url)
                 .username(username).password(password)
