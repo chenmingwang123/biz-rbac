@@ -20,6 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/account")
 public interface IInterpretApi {
 
+    /**
+     * 登录
+     * @param dto
+     * @return
+     */
     @Operation(summary = "登录")
     @PostMapping("login")
     Result<UserDTO> login(@RequestBody UserDTO dto);

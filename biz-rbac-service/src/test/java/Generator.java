@@ -23,12 +23,17 @@ public class Generator {
         // 表前缀
         String tablePrefix = "t_sys";
         // 生成的表列表
-        String[] tables = new String[]{"t_sys_org_struct"};
-        // 项目更目录
-        System.setProperty("user.dir","D:/javaCode/biz-rbac/biz-rbac-service");
+        String[] tables = new String[]{"t_sys_account","t_sys_org_struct"};
 
+        // 项目根目录
+        String rootPath = "D:/javaCode/biz-rbac";
+        // API工程名称
+        String apiProject = "biz-rbac-api";
+        // 服务实现工程名称
+        String serviceProject = "biz-rbac-service";
         CodeGenerator.builder().url(url)
                 .username(username).password(password)
+                .rootPath(rootPath).apiProject(apiProject).serviceProject(serviceProject)
                 .author(author).moduleName(moduleName).packageName(packageName).mapperFileOverride(mapperFileOverride)
                 .tablePrefix(tablePrefix).tables(tables)
                 .build().generator();

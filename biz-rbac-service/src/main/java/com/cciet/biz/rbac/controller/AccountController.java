@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 /**
- * <p>
- * 登录
- * </p>
- *
- * @author cmw
- * @since 2023/05/15 18:02
- */
+* <p>
+* 用户账号表 前端控制器
+* </p>
+*
+* @author cmw
+* @since 2023/05/18 15:56
+*/
 @RestController
 @RequestMapping("/rbac/account")
-public class AccountController implements IAccountApi {
+public class AccountController implements IAccountApi{
+
     @Resource
     public IAccountService accountService;
-
     /**
      * 登录
      * @param userDTO
@@ -31,6 +31,7 @@ public class AccountController implements IAccountApi {
      */
     @Override
     public Result<AccountVO> login(UserDTO userDTO) {
-        return accountService.loginLogic(userDTO);
+        return Result.ok(accountService.loginLogic(userDTO));
     }
+
 }

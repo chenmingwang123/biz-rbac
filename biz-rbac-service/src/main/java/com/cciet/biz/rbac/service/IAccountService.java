@@ -3,7 +3,6 @@ package com.cciet.biz.rbac.service;
 import com.cciet.biz.rbac.dto.UserDTO;
 import com.cciet.biz.rbac.entity.Account;
 import com.cciet.biz.rbac.vo.AccountVO;
-import com.cciet.common.bean.Result;
 import com.cciet.mybatis.supers.ISupperService;
 
 /**
@@ -12,9 +11,9 @@ import com.cciet.mybatis.supers.ISupperService;
  * </p>
  *
  * @author cmw
- * @since 2023/05/15 18:02
+ * @since 2023/05/18 15:56
  */
 public interface IAccountService extends ISupperService<Account> {
+    AccountVO loginLogic(UserDTO userDTO);
 
-    Result<AccountVO> loginLogic(UserDTO userDTO);
 }

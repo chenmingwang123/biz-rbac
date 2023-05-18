@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/rbac/account")
 public interface IAccountApi {
 
-
     @Operation(summary = "登录")
     @PostMapping("login")
     Result<AccountVO> login(@RequestBody UserDTO dto);

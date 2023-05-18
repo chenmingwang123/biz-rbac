@@ -2,7 +2,6 @@ package com.cciet.biz.rbac.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.cciet.biz.rbac.dto.AccountState;
 import com.cciet.mybatis.supers.SupperEntity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,7 +16,7 @@ import java.time.LocalDateTime;
  * </p>
  *
  * @author cmw
- * @since 2023/05/15 18:02
+ * @since 2023/05/18 15:56
  */
 @Getter
 @Setter
@@ -28,11 +27,24 @@ public class Account extends SupperEntity<Account> {
 
     private static final long serialVersionUID = 1L;
 
+
+    /**
+     * 组织id
+     */
+    @TableField("org_id")
+    private Long orgId;
+
+    /**
+     * 部门id
+     */
+    @TableField("dep_id")
+    private Long depId;
+
     /**
      * 账号
      */
-    @TableField("account")
-    private String account;
+    @TableField("account_name")
+    private String accountName;
 
     /**
      * 密码
@@ -71,10 +83,10 @@ public class Account extends SupperEntity<Account> {
     private Boolean changePassword;
 
     /**
-     * 状态(NORMAL:启用 DISABLE:停用 LOCK:锁定)
+     * 状态
      */
     @TableField("state")
-    private AccountState state;
+    private String state;
 
     /**
      * 停用原因
@@ -105,4 +117,59 @@ public class Account extends SupperEntity<Account> {
      */
     @TableField("final_login_time")
     private LocalDateTime finalLoginTime;
+    public static final class Columns{
+        private Columns(){}
+        /**
+        *  account_name:账号
+        */
+        public static final String ACCOUNT_NAME = "account_name";
+        /**
+        *  password:密码
+        */
+        public static final String PASSWORD = "password";
+        /**
+        *  head_sculpture:头像
+        */
+        public static final String HEAD_SCULPTURE = "head_sculpture";
+        /**
+        *  nick_name:昵称
+        */
+        public static final String NICK_NAME = "nick_name";
+        /**
+        *  password_update_time:修改密码时间
+        */
+        public static final String PASSWORD_UPDATE_TIME = "password_update_time";
+        /**
+        *  password_error_count:密码错误次数
+        */
+        public static final String PASSWORD_ERROR_COUNT = "password_error_count";
+        /**
+        *  change_password:要求登录后修改密码
+        */
+        public static final String CHANGE_PASSWORD = "change_password";
+        /**
+        *  state:状态
+        */
+        public static final String STATE = "state";
+        /**
+        *  deactivate_reason:停用原因
+        */
+        public static final String DEACTIVATE_REASON = "deactivate_reason";
+        /**
+        *  lock_time:锁定时间
+        */
+        public static final String LOCK_TIME = "lock_time";
+        /**
+        *  final_activation_time:最后激活时间
+        */
+        public static final String FINAL_ACTIVATION_TIME = "final_activation_time";
+        /**
+        *  auto_activation_time:自动激活时间
+        */
+        public static final String AUTO_ACTIVATION_TIME = "auto_activation_time";
+        /**
+        *  final_login_time:最后登录时间
+        */
+        public static final String FINAL_LOGIN_TIME = "final_login_time";
+    }
 }
