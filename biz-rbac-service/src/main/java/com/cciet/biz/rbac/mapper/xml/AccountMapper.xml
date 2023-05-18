@@ -1,32 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cciet.biz.rbac.mapper.AccountMapper">
+<mapper namespace="com.cciet.biz.rbac.mapper.IAccountMapper">
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.cciet.biz.rbac.entity.Account">
-        <result column="ID" property="id" />
-        <result column="VERSION" property="version" />
-        <result column="CREATE_TIME" property="createTime" />
-        <result column="CREATE_USER_ID" property="createUserId" />
-        <result column="UPDATE_TIME" property="updateTime" />
-        <result column="UPDATE_USER_ID" property="updateUserId" />
-        <result column="DELETE_TIME" property="deleteTime" />
-        <result column="DELETE_USER_ID" property="deleteUserId" />
-        <result column="DELETED" property="deleted" />
-        <result column="ACCOUNT_NAME" property="accountName" />
-        <result column="PASSWORD" property="password" />
-        <result column="PORTRAIT" property="portrait" />
-        <result column="NICKNAME" property="nickname" />
-        <result column="UPDATE_PWD_TIME" property="updatePwdTime" />
-        <result column="WRONG_PWD_NUM" property="wrongPwdNum" />
-        <result column="NEED_CHANGE_PWD" property="needChangePwd" />
-        <result column="LAST_LOGIN_TIME" property="lastLoginTime" />
-        <result column="STATE" property="state" />
-        <result column="DISABLE_TIME" property="disableTime" />
-        <result column="DISABLE_CAUSE" property="disableCause" />
-        <result column="LOCAL_TIME" property="localTime" />
-        <result column="AUTO_ACTIVATE_TIME" property="autoActivateTime" />
-        <result column="ACTIVATE_TIME" property="activateTime" />
+        <result column="id" property="id" />
+        <result column="create_user_id" property="createUserId" />
+        <result column="create_time" property="createTime" />
+        <result column="update_user_id" property="updateUserId" />
+        <result column="update_time" property="updateTime" />
+        <result column="delete_user_id" property="deleteUserId" />
+        <result column="delete_time" property="deleteTime" />
+        <result column="create_org_id" property="createOrgId" />
+        <result column="create_dep_id" property="createDepId" />
+        <result column="version" property="version" />
+        <result column="org_id" property="orgId" />
+        <result column="dep_id" property="depId" />
+        <result column="deleted" property="deleted" />
+        <result column="account_name" property="accountName" />
+        <result column="password" property="password" />
+        <result column="head_sculpture" property="headSculpture" />
+        <result column="nick_name" property="nickName" />
+        <result column="password_update_time" property="passwordUpdateTime" />
+        <result column="password_error_count" property="passwordErrorCount" />
+        <result column="change_password" property="changePassword" />
+        <result column="state" property="state" />
+        <result column="deactivate_reason" property="deactivateReason" />
+        <result column="lock_time" property="lockTime" />
+        <result column="final_activation_time" property="finalActivationTime" />
+        <result column="auto_activation_time" property="autoActivationTime" />
+        <result column="final_login_time" property="finalLoginTime" />
     </resultMap>
 
 </mapper>
