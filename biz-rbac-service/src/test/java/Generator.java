@@ -23,9 +23,9 @@ public class Generator {
         // 表前缀
         String tablePrefix = "t_sys";
         // 生成的表列表
-        String[] tables = new String[]{"t_sys_account"};
+        String[] tables = new String[]{"t_sys_org_struct"};
         // 项目更目录
-        System.setProperty("user.dir","D:\\javaCode\\biz-rbac\\biz-rbac-service");
+        System.setProperty("user.dir","D:/javaCode/biz-rbac/biz-rbac-service");
 
         CodeGenerator.builder().url(url)
                 .username(username).password(password)
