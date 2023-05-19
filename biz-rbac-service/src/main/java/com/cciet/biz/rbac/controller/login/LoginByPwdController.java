@@ -37,5 +37,4 @@ public class LoginByPwdController implements ILoginApi<LoginByPwdDTO> {
         return Result.ok(token);
     }
 
-
 }

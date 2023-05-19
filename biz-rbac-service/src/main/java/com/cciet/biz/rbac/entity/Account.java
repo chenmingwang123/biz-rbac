@@ -96,6 +96,12 @@ public class Account extends SupperEntity<Account> {
     private String deactivateReason;
 
     /**
+     * 停用时间
+     */
+    @TableField("disable_time")
+    private LocalDateTime disableTime;
+
+    /**
      * 锁定时间
      */
     @TableField("lock_time")

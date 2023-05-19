@@ -35,8 +35,8 @@ public class LoginLockFeignController implements ILoginLockApi {
     }
 
     @Override
-    public Result<Boolean> loginFailedApi(String accountName) {
-        loginLock.loginFailed(accountName);
+    public Result<Boolean> loginFailedApi(String accountName,int loginErrorLimit) {
+        loginLock.loginFailed(accountName,loginErrorLimit);
         return Result.ok(Boolean.TRUE);
     }
 

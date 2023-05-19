@@ -33,7 +33,7 @@ public interface IAccountService extends ISupperService<Account> {
      * @param accountName
      * @return
      */
-    AccountDTO getByAccountName(String accountName);
+    Account getByAccountName(String accountName);
 
     /**
      *根据账号ID获取摘要信息

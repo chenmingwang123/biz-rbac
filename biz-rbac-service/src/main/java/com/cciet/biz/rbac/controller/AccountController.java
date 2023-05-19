@@ -1,14 +1,18 @@
 package com.cciet.biz.rbac.controller;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.cciet.biz.rbac.api.IAccountApi;
 import com.cciet.biz.rbac.constant.AccountStateEnum;
 import com.cciet.biz.rbac.dto.AccountDTO;
 import com.cciet.biz.rbac.dto.AccountQueryDTO;
+import com.cciet.biz.rbac.entity.Account;
 import com.cciet.biz.rbac.service.IAccountService;
 import com.cciet.biz.rbac.vo.AccountSummaryVO;
 import com.cciet.common.bean.PageRequest;
 import com.cciet.common.bean.PageResponse;
 import com.cciet.common.bean.Result;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,6 +29,7 @@ import java.util.Set;
 */
 @RestController
 @RequestMapping("/rbac/account")
+@Tag(name = "用户账号")
 public class AccountController implements IAccountApi{
 
     @Resource
@@ -37,7 +42,11 @@ public class AccountController implements IAccountApi{
 
     @Override
     public Result<AccountDTO> getAccountName(String accountName) {
-        return Result.ok(accountService.getByAccountName(accountName));
+        Account account = accountService.getByAccountName(accountName);
+        if (ObjectUtil.isNotEmpty(account)){
+            return Result.ok(BeanUtil.copyProperties(account, AccountDTO.class));
+        }
+        return Result.ok();
     }
 
     @Override

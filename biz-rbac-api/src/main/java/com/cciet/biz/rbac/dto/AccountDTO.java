@@ -51,37 +51,37 @@ public class AccountDTO {
      * 头像地址
      */
     @Schema(description = "头像地址")
-    private String portrait;
+    private String headSculpture;
 
     /**
      * 昵称
      */
     @Schema(description = "昵称")
-    private String nickname;
+    private String nickName;
 
     /**
      * 最近一次修改密码时间
      */
     @Schema(description = "最近一次修改密码时间")
-    private LocalDateTime updatePwdTime;
+    private LocalDateTime passwordUpdateTime;
 
     /**
      * 密码错误次数
      */
     @Schema(description = "密码错误次数")
-    private Integer wrongPwdNum;
+    private Integer passwordErrorCount;
 
     /**
      * 登录后需要修改密码
      */
     @Schema(description = "登录后需要修改密码")
-    private Boolean needChangePwd;
+    private Boolean changePassword;
 
     /**
-     * 资源id
+     * 最后登录时间
      */
-    @Schema(description = "资源id")
-    private LocalDateTime lastLoginTime;
+    @Schema(description = "最后登录时间")
+    private LocalDateTime finalLoginTime;
 
     /**
      * 启(normal)/停(disable)/锁(lock)状态
@@ -99,7 +99,7 @@ public class AccountDTO {
      * 停用原因
      */
     @Schema(description = "停用原因")
-    private String disableCause;
+    private String deactivateReason;
 
     /**
      * 锁定时间
@@ -111,11 +111,11 @@ public class AccountDTO {
      * 自动激活时间
      */
     @Schema(description = "自动激活时间")
-    private LocalDateTime autoActivateTime;
+    private LocalDateTime autoActivationTime;
 
     /**
      * 最后一次激活时间
      */
     @Schema(description = "最后一次激活时间")
-    private LocalDateTime activateTime;
+    private LocalDateTime finalActivationTime;
 }

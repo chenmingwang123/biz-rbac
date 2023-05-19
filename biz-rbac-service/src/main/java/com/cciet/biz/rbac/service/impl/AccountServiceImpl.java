@@ -53,14 +53,10 @@ public class AccountServiceImpl extends SupperServiceImpl<IAccountMapper, Accoun
      * @return
      */
     @Override
-    public AccountDTO getByAccountName(String accountName) {
+    public Account getByAccountName(String accountName) {
         LambdaQueryWrapper<Account> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(Account::getAccountName,accountName);
-        Account account = accountMapper.selectOne(queryWrapper);
-        if (ObjectUtil.isNotEmpty(account)){
-            return BeanUtil.copyProperties(account, AccountDTO.class);
-        }
-        return null;
+        return accountMapper.selectOne(queryWrapper);
     }
 
     @Override

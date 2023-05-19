@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 * @since 2023/05/18 10:46
 */
 @Validated
-@Tag(name = "组织架构表")
+@Tag(name = "组织架构")
 public interface IOrgStructApi {
 
     /**
