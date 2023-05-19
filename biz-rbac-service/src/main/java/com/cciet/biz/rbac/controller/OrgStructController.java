@@ -27,4 +27,9 @@ public class OrgStructController implements IOrgStructApi{
     public Result<OrgSaveDTO> saveOrg(OrgSaveDTO orgSaveDTO) {
         return Result.ok(orgStructService.saveOrg(orgSaveDTO));
     }
+
+    @Override
+    public Result<OrgSaveDTO> updateOrg(OrgSaveDTO orgSaveDTO) {
+        return null;
+    }
 }

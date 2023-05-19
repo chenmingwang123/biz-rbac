@@ -1,4 +1,4 @@
-package com.cciet.biz.rbac.dto;
+package com.cciet.biz.rbac.constant;
 
 import com.cciet.common.interfaces.IEnum;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum AccountState implements IEnum {
+public enum AccountStateEnum implements IEnum {
     NORMAL("启动"),
     DISABLE("停用"),
     LOCK("锁定")

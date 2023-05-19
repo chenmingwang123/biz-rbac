@@ -2,6 +2,7 @@ package com.cciet.biz.rbac.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.cciet.biz.rbac.constant.AccountStateEnum;
 import com.cciet.mybatis.supers.SupperEntity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -86,7 +87,7 @@ public class Account extends SupperEntity<Account> {
      * 状态
      */
     @TableField("state")
-    private String state;
+    private AccountStateEnum state;
 
     /**
      * 停用原因

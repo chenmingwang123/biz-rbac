@@ -27,4 +27,13 @@ public interface IOrgStructApi {
     @Operation(summary = "新增组织架构")
     @PostMapping("saveOrg")
     Result<OrgSaveDTO> saveOrg(@RequestBody OrgSaveDTO orgSaveDTO);
+
+    /**
+     * 修改组织架构
+     * @param orgSaveDTO
+     * @return
+     */
+    @Operation(summary = "修改组织架构")
+    @PostMapping("updateOrg")
+    Result<OrgSaveDTO> updateOrg(@RequestBody OrgSaveDTO orgSaveDTO);
 }
