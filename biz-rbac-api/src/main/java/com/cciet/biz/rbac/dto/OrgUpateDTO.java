@@ -15,9 +15,9 @@ import javax.validation.constraints.NotBlank;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Schema(description = "组织新增DTO")
+@Schema(description = "组织修改DTO")
 @Validated
-public class OrgSaveDTO {
+public class OrgUpateDTO {
 
     @Schema(description = "ID")
     private Long id;
@@ -37,25 +37,13 @@ public class OrgSaveDTO {
     @Schema(description = "组织简称")
     private String orgAbbreviation;
 
-    @NotBlank
-    @Schema(description = "组织类型(公司，部门，小组，岗位)")
-    private String orgType;
-
-    @Schema(description = "上级组织")
-    private Long pid;
-
-    @Schema(description = "组织路径")
-    private String path;
-
     @Override
     public String toString() {
         return "OrgSaveDTO{" +
                 "orgCode='" + orgCode + '\'' +
                 ", orgName='" + orgName + '\'' +
                 ", orgAbbreviation='" + orgAbbreviation + '\'' +
-                ", orgAbbreviationCode='" + orgAbbreviationCode + '\'' +
-                ", orgType='" + orgType + '\'' +
-                ", pid=" + pid +
+                ", orgAbbreviationCode='" + orgAbbreviationCode +
                 '}';
     }
 }

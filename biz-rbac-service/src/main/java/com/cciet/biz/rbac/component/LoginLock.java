@@ -28,6 +28,13 @@ public class LoginLock implements ILoginLock {
     public IAccountMapper accountMapper;
     @Resource
     public IAccountService accountService;
+
+    /**
+     * 登录前回调
+     * @param accountName
+     * @param loginErrorLimit
+     * @return
+     */
     @Override
     public boolean canAbleLogin(String accountName, int loginErrorLimit) {
         //登录验证错误次数
@@ -52,6 +59,10 @@ public class LoginLock implements ILoginLock {
         return true;
     }
 
+    /**
+     * 登录成功回调
+     * @param accountName
+     */
     @Override
     public void loginSuccess(String accountName) {
         //登录成功清空错误次数，设置时间
@@ -63,6 +74,12 @@ public class LoginLock implements ILoginLock {
 
     }
 
+    /**
+     * 登录错误回调
+     *
+     * @param accountName
+     * @param loginErrorLimit
+     */
     @Override
     public void loginFailed(String accountName,int loginErrorLimit) {
         Account account = accountService.getByAccountName(accountName);

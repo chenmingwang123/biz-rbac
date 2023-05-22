@@ -8,6 +8,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldNameConstants;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <p>
  * 组织架构表
@@ -61,8 +64,11 @@ public class OrgStruct extends SupperEntity<OrgStruct> {
     @TableField("pid")
     private Long pid;
 
+    @TableField(exist = false)
+    private List<OrgStruct> childrens = new ArrayList<>();
+
     /**
-     * 组织类型(公司，部门，小组)
+     * 组织类型(公司，部门，小组，岗位)
      */
     @TableField("org_type")
     private String orgType;
@@ -93,7 +99,7 @@ public class OrgStruct extends SupperEntity<OrgStruct> {
         */
         public static final String PID = "pid";
         /**
-        *  org_type:组织类型(公司，部门，小组)
+        *  org_type:组织类型(公司，部门，小组，岗位)
         */
         public static final String ORG_TYPE = "org_type";
     }
