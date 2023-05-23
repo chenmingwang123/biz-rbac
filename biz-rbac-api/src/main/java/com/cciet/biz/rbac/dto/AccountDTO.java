@@ -86,7 +86,7 @@ public class AccountDTO {
     /**
      * 启(normal)/停(disable)/锁(lock)状态
      */
-    @Schema(description = "启(normal)/停(disable)/锁(lock)状态")
+    @Schema(description = "启(normal)/停(disable)/锁(lock)状态",implementation = AccountStateEnum.class)
     private AccountStateEnum state;
 
     /**

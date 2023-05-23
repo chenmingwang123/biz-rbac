@@ -3,7 +3,7 @@ package com.cciet.biz.rbac.constant;
 /**
  * @author cmw
  */
-public interface OrgConstant {
+public interface ParentConstant {
 
     /**
      * 一级
@@ -24,6 +24,6 @@ public interface OrgConstant {
      */
     static String appendPath(String parentPath, Object selfPath) {
         StringBuffer parent = new StringBuffer(parentPath);
-        return parent.append(selfPath.toString()).append(OrgConstant.SPLIT).toString();
+        return parent.append(selfPath.toString()).append(ParentConstant.SPLIT).toString();
     }
 }

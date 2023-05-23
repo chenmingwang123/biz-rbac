@@ -1,7 +1,7 @@
 package com.cciet.biz.rbac.component;
 
 import cn.hutool.crypto.SecureUtil;
-import com.cciet.biz.rbac.constant.LoginInfo;
+import com.cciet.biz.rbac.constant.errinfo.LoginInfo;
 import com.cciet.biz.rbac.controller.login.LoginByPwdDTO;
 import com.cciet.biz.rbac.entity.Account;
 import com.cciet.biz.rbac.service.IAccountService;

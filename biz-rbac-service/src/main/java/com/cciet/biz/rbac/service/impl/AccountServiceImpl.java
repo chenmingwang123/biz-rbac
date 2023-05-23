@@ -5,7 +5,6 @@ import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.conditions.update.UpdateChainWrapper;
-import com.cciet.biz.rbac.constant.AccountStateEnum;
 import com.cciet.biz.rbac.dto.AccountDTO;
 import com.cciet.biz.rbac.dto.AccountQueryDTO;
 import com.cciet.biz.rbac.entity.Account;
@@ -88,7 +87,7 @@ public class AccountServiceImpl extends SupperServiceImpl<IAccountMapper, Accoun
     }
 
     @Override
-    public Boolean state(Long id, AccountStateEnum state, String disableCause) {
+    public Boolean state(Long id, String state, String disableCause) {
         UpdateChainWrapper<Account> updateChainWrapper =  this.update();
         updateChainWrapper.set(Account.Columns.DEACTIVATE_REASON, disableCause);
         updateChainWrapper.set(Account.Columns.STATE, state);

@@ -1,6 +1,5 @@
 package com.cciet.biz.rbac.service;
 
-import com.cciet.biz.rbac.constant.AccountStateEnum;
 import com.cciet.biz.rbac.dto.AccountDTO;
 import com.cciet.biz.rbac.dto.AccountQueryDTO;
 import com.cciet.biz.rbac.entity.Account;
@@ -63,7 +62,7 @@ public interface IAccountService extends ISupperService<Account> {
      * @param disableCause
      * @return
      */
-    Boolean state(Long id, AccountStateEnum state, String disableCause);
+    Boolean state(Long id, String state, String disableCause);
 
     /**
      * 保存账号信息

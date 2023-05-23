@@ -3,7 +3,7 @@ package com.cciet.biz.rbac.component;
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.cciet.biz.rbac.constant.AccountStateEnum;
-import com.cciet.biz.rbac.constant.LoginInfo;
+import com.cciet.biz.rbac.constant.errinfo.LoginInfo;
 import com.cciet.biz.rbac.entity.Account;
 import com.cciet.biz.rbac.mapper.IAccountMapper;
 import com.cciet.biz.rbac.service.IAccountService;

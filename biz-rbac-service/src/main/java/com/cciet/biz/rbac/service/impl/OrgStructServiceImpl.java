@@ -3,8 +3,8 @@ package com.cciet.biz.rbac.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.cciet.biz.rbac.constant.OrgConstant;
-import com.cciet.biz.rbac.constant.OrgInfo;
+import com.cciet.biz.rbac.constant.ParentConstant;
+import com.cciet.biz.rbac.constant.errinfo.OrgInfo;
 import com.cciet.biz.rbac.dto.OrgSaveDTO;
 import com.cciet.biz.rbac.dto.OrgUpateDTO;
 import com.cciet.biz.rbac.entity.OrgStruct;
@@ -52,12 +52,12 @@ public class OrgStructServiceImpl extends SupperServiceImpl<IOrgStructMapper, Or
         }
         //拼接path
         orgSaveDTO =  saveOrUpdate(orgSaveDTO.getId(),orgSaveDTO);
-        if (OrgConstant.TOP.equals(orgSaveDTO.getPid())) {
-            orgSaveDTO.setPath(orgSaveDTO.getId() + OrgConstant.SPLIT.toString());
+        if (ParentConstant.TOP.equals(orgSaveDTO.getPid())) {
+            orgSaveDTO.setPath(orgSaveDTO.getId() + ParentConstant.SPLIT.toString());
         } else {
             OrgStruct orgStruct = orgStructMapper.selectById(orgSaveDTO.getPid());
             if (ObjectUtil.isNotEmpty(orgStruct)) {
-                orgSaveDTO.setPath(OrgConstant.appendPath(orgStruct.getPath(), orgSaveDTO.getId()));
+                orgSaveDTO.setPath(ParentConstant.appendPath(orgStruct.getPath(), orgSaveDTO.getId()));
             }
         }
         return saveOrUpdate(orgSaveDTO.getId(),orgSaveDTO);
@@ -72,7 +72,7 @@ public class OrgStructServiceImpl extends SupperServiceImpl<IOrgStructMapper, Or
     public OrgUpateDTO updateOrg(OrgUpateDTO orgUpateDTO) {
         OrgStruct orgStruct = orgStructMapper.selectById(orgUpateDTO.getId());
         if (ObjectUtil.isEmpty(orgStruct)){
-            BusinessException.result(OrgInfo.ORG_NAME_EXIST);
+            BusinessException.result(OrgInfo.USER_DOES_NOT_EXIST);
         }
         return saveOrUpdate(orgUpateDTO.getId(),orgUpateDTO);
     }

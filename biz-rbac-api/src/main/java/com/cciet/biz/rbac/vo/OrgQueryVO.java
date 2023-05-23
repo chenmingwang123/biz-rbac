@@ -10,9 +10,9 @@ import org.springframework.validation.annotation.Validated;
 import java.util.List;
 
 /**
- * 账号摘要信息
+ * 组织结构展示
  *
- * @author huanghui
+ * @author cmw
  * @since 2023/5/16 18:20
  */
 @Setter

@@ -95,7 +95,7 @@ public interface IAccountApi {
             @Parameter(name = "state", description = "账号状态", required = true, schema = @Schema(implementation = AccountStateEnum.class)),
             @Parameter(name = "disableCause", description = "禁用原因")
     })
-    Result<Boolean> state(@RequestParam(value = "id") Long id, @RequestParam(value = "state") AccountStateEnum state,
+    Result<Boolean> state(@RequestParam(value = "id") Long id, @RequestParam(value = "state") String state,
                           @RequestParam(value = "disableCause", required = false) String disableCause);
 
     /**

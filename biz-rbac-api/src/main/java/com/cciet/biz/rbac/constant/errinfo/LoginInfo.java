@@ -1,4 +1,4 @@
-package com.cciet.biz.rbac.constant;
+package com.cciet.biz.rbac.constant.errinfo;
 
 import com.cciet.common.interfaces.IResultInfo;
 import lombok.AllArgsConstructor;

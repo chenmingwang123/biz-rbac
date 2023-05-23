@@ -3,7 +3,6 @@ package com.cciet.biz.rbac.controller;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.cciet.biz.rbac.api.IAccountApi;
-import com.cciet.biz.rbac.constant.AccountStateEnum;
 import com.cciet.biz.rbac.dto.AccountDTO;
 import com.cciet.biz.rbac.dto.AccountQueryDTO;
 import com.cciet.biz.rbac.entity.Account;
@@ -65,7 +64,7 @@ public class AccountController implements IAccountApi{
     }
 
     @Override
-    public Result<Boolean> state(Long id, AccountStateEnum state, String disableCause) {
+    public Result<Boolean> state(Long id, String state, String disableCause) {
         return Result.ok(accountService.state(id,state,disableCause));
     }
 

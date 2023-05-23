@@ -23,7 +23,7 @@ public class Generator {
         // 表前缀
         String tablePrefix = "t_sys";
         // 生成的表列表
-        String[] tables = new String[]{"t_sys_account","t_sys_org_struct"};
+        String[] tables = new String[]{"t_sys_role","t_sys_res","t_sys_role_res","t_sys_account_role","t_sys_account_role"};
 
         // 项目根目录
         String rootPath = "D:/javaCode/biz-rbac";
