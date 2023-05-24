@@ -30,18 +30,6 @@ public class Account extends SupperEntity<Account> {
 
 
     /**
-     * 组织id
-     */
-    @TableField("org_id")
-    private Long orgId;
-
-    /**
-     * 部门id
-     */
-    @TableField("dep_id")
-    private Long depId;
-
-    /**
      * 账号
      */
     @TableField("account_name")
@@ -162,6 +150,10 @@ public class Account extends SupperEntity<Account> {
         *  deactivate_reason:停用原因
         */
         public static final String DEACTIVATE_REASON = "deactivate_reason";
+        /**
+         *  disable_time:停用时间
+         */
+        public static final String DISABLE_TIME = "disable_time";
         /**
         *  lock_time:锁定时间
         */

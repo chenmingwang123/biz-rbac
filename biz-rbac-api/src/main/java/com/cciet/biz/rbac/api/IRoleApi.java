@@ -1,8 +1,10 @@
 package com.cciet.biz.rbac.api;
 
 import com.cciet.biz.rbac.constant.StateEnum;
+import com.cciet.biz.rbac.dto.OrgRoleDTO;
 import com.cciet.biz.rbac.dto.RoleDTO;
 import com.cciet.biz.rbac.dto.RoleQueryDTO;
+import com.cciet.biz.rbac.vo.OrgRoleCurrentVO;
 import com.cciet.common.bean.PageRequest;
 import com.cciet.common.bean.PageResponse;
 import com.cciet.common.bean.Result;
@@ -13,6 +15,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -48,10 +51,10 @@ public interface IRoleApi {
     @PostMapping("/state")
     @Operation(summary = "根据ID更新角色状态", parameters = {
             @Parameter(name = "id", description = "ID", required = true),
-            @Parameter(name = "state", description = "账号状态", required = true, schema = @Schema(implementation = StateEnum.class)),
+            @Parameter(name = "state", description = "账号状态 NORMAL：启用 DISABLE：停用", required = true, schema = @Schema(implementation = StateEnum.class)),
             @Parameter(name = "stopReason", description = "停用原因")
     })
-    Result<Boolean> state(@RequestParam(value = "id") Long id, @RequestParam(value = "state") String state,
+    Result<Boolean> state(@RequestParam(value = "id") Long id, @RequestParam(value = "state") StateEnum state,
                           @RequestParam(value = "disableCause", required = false) String disableCause);
 
     /**
@@ -63,6 +66,28 @@ public interface IRoleApi {
     @PostMapping("/save")
     @Operation(summary = "保存角色信息")
     Result<RoleDTO> save(@RequestBody RoleDTO roleDTO);
+
+    /**
+     * 保存组织角色
+     *
+     * @param orgRoleDTO SysOrgRoleDTO
+     * @return Result<SysOrgRoleDTO>
+     */
+    @PostMapping("/saveOrgRole")
+    @Operation(summary = "保存组织角色")
+    Result<OrgRoleDTO> saveOrgRole(@RequestBody OrgRoleDTO orgRoleDTO);
+
+    /**
+     * 获取当前组织的角色
+     *
+     * @param orgId
+     * @return Result<OrgRoleCurrentVO>
+     */
+    @GetMapping("/getRolesByOrgId")
+    @Operation(summary = "获取当前组织的角色",parameters = {
+            @Parameter(name = "orgId", description = "orgId", required = true)
+    })
+    Result<List<OrgRoleCurrentVO>> getRolesByOrgId(@RequestParam(value = "orgId") Long orgId);
 
     /**
      * 分页条件查询角色信息

@@ -1,5 +1,6 @@
 package com.cciet.biz.rbac.service;
 
+import com.cciet.biz.rbac.constant.StateEnum;
 import com.cciet.biz.rbac.dto.ResDTO;
 import com.cciet.biz.rbac.dto.ResQueryDTO;
 import com.cciet.biz.rbac.entity.Res;
@@ -33,7 +34,7 @@ public interface IResService extends ISupperService<Res> {
      * @param state
      * @return
      */
-    Boolean state(Long id, String state);
+    Boolean state(Long id, StateEnum state);
 
     /**
      * 保存菜单

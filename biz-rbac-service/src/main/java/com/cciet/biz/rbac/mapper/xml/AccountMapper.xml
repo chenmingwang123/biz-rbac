@@ -14,8 +14,6 @@
         <result column="create_org_id" property="createOrgId" />
         <result column="create_dep_id" property="createDepId" />
         <result column="version" property="version" />
-        <result column="org_id" property="orgId" />
-        <result column="dep_id" property="depId" />
         <result column="deleted" property="deleted" />
         <result column="account_name" property="accountName" />
         <result column="password" property="password" />

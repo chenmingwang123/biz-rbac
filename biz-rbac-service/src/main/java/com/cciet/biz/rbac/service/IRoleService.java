@@ -1,12 +1,16 @@
 package com.cciet.biz.rbac.service;
 
+import com.cciet.biz.rbac.constant.StateEnum;
+import com.cciet.biz.rbac.dto.OrgRoleDTO;
 import com.cciet.biz.rbac.dto.RoleDTO;
 import com.cciet.biz.rbac.dto.RoleQueryDTO;
 import com.cciet.biz.rbac.entity.Role;
+import com.cciet.biz.rbac.vo.OrgRoleCurrentVO;
 import com.cciet.common.bean.PageRequest;
 import com.cciet.common.bean.PageResponse;
 import com.cciet.mybatis.supers.ISupperService;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -33,7 +37,7 @@ public interface IRoleService extends ISupperService<Role> {
      * @param disableCause
      * @return
      */
-    Boolean state(Long id, String state, String disableCause);
+    Boolean state(Long id, StateEnum state, String disableCause);
 
     /**
      * 保存角色信息
@@ -64,4 +68,18 @@ public interface IRoleService extends ISupperService<Role> {
      * @return
      */
     Boolean deletes(Set<Long> ids);
+
+    /**
+     * 保存组织角色
+     * @param orgRoleDTO
+     * @return
+     */
+    OrgRoleDTO saveOrgRole(OrgRoleDTO orgRoleDTO);
+
+    /**
+     * 获取当前组织的角色
+     * @param orgId
+     * @return
+     */
+    List<OrgRoleCurrentVO> getRolesByOrgId(Long orgId);
 }

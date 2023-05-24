@@ -3,23 +3,36 @@ package com.cciet.biz.rbac.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.crypto.SecureUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.conditions.update.UpdateChainWrapper;
+import com.cciet.biz.rbac.constant.AccountStateEnum;
+import com.cciet.biz.rbac.constant.OrgTypeEnum;
+import com.cciet.biz.rbac.constant.StateEnum;
+import com.cciet.biz.rbac.constant.errinfo.LoginInfo;
 import com.cciet.biz.rbac.dto.AccountDTO;
 import com.cciet.biz.rbac.dto.AccountQueryDTO;
 import com.cciet.biz.rbac.entity.Account;
+import com.cciet.biz.rbac.entity.OrgAccount;
+import com.cciet.biz.rbac.entity.OrgStruct;
 import com.cciet.biz.rbac.mapper.IAccountMapper;
+import com.cciet.biz.rbac.mapper.IOrgAccountMapper;
+import com.cciet.biz.rbac.mapper.IOrgStructMapper;
 import com.cciet.biz.rbac.service.IAccountService;
 import com.cciet.biz.rbac.vo.AccountSummaryVO;
 import com.cciet.common.bean.PageRequest;
 import com.cciet.common.bean.PageResponse;
+import com.cciet.common.exception.BusinessException;
 import com.cciet.mybatis.supers.SupperEntity;
 import com.cciet.mybatis.supers.SupperServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -38,6 +51,13 @@ public class AccountServiceImpl extends SupperServiceImpl<IAccountMapper, Accoun
 
     @Resource
     public IAccountMapper accountMapper;
+
+    @Resource
+    public IOrgStructMapper orgStructMapper;
+
+    @Resource
+    public IOrgAccountMapper orgAccountMapper;
+
 
     private static final String INIT_PWD = "123456";
 
@@ -87,17 +107,71 @@ public class AccountServiceImpl extends SupperServiceImpl<IAccountMapper, Accoun
     }
 
     @Override
-    public Boolean state(Long id, String state, String disableCause) {
+    public Boolean state(Long id, StateEnum state, String disableCause) {
         UpdateChainWrapper<Account> updateChainWrapper =  this.update();
         updateChainWrapper.set(Account.Columns.DEACTIVATE_REASON, disableCause);
         updateChainWrapper.set(Account.Columns.STATE, state);
+        if (AccountStateEnum.DISABLE.name().equals(state)){
+            updateChainWrapper.set(Account.Columns.DISABLE_TIME, new Date());
+        }
         updateChainWrapper.eq(SupperEntity.Columns.ID,id);
         return updateChainWrapper.update();
     }
 
     @Override
+    @Transactional(rollbackFor = Throwable.class)
     public AccountDTO save(AccountDTO accountDto) {
-        return saveOrUpdate(accountDto.getId(),accountDto);
+        LambdaQueryWrapper<Account> queryWrapper = new LambdaQueryWrapper<>();
+        if (accountDto.getId()==null){
+            accountDto.setState(AccountStateEnum.NORMAL);
+            accountDto.setPassword(SecureUtil.md5(accountDto.getPassword()));
+            accountDto.setPasswordErrorCount(0);
+            queryWrapper.eq(Account::getAccountName,accountDto.getAccountName());
+        }else {
+            queryWrapper.eq(Account::getAccountName,accountDto.getAccountName());
+            queryWrapper.ne(Account::getId,accountDto.getId());
+        }
+        List<Account> resList = accountMapper.selectList(queryWrapper);
+        if (!CollectionUtils.isEmpty(resList)){
+            BusinessException.result(LoginInfo.ACCOUNT_NAME_EXIST);
+        }
+        AccountDTO accountDTO = saveOrUpdate(accountDto.getId(), accountDto);
+        //保存岗位
+        saveOrgAccount(accountDto);
+        return accountDTO;
+    }
+
+    /**
+     * 新增账号组织关联
+     * @param accountDto
+     */
+    private void saveOrgAccount(AccountDTO accountDto) {
+        LambdaQueryWrapper<OrgStruct> orgQueryWrapper = new LambdaQueryWrapper<>();
+        orgQueryWrapper.in(!CollectionUtils.isEmpty(accountDto.getOrgId()),OrgStruct::getId, accountDto.getOrgId());
+        List<OrgStruct> orgStructs = orgStructMapper.selectList(orgQueryWrapper);
+        //获取是组织类型
+        orgStructs.forEach(o ->{
+            OrgTypeEnum orgType = OrgTypeEnum.parse(o.getOrgType());
+            OrgAccount orgAccount = new OrgAccount();
+            orgAccount.setAccountId(accountDto.getId());
+            orgAccount.setOrgId(o.getId());
+            switch (Objects.requireNonNull(orgType)) {
+                case ORG:
+                    orgAccount.setOrgType(OrgTypeEnum.ORG.name());
+                    break;
+                case DEP:
+                    orgAccount.setOrgType(OrgTypeEnum.DEP.name());
+                    break;
+                case GROUP:
+                    orgAccount.setOrgType(OrgTypeEnum.GROUP.name());
+                    break;
+                case POST:
+                    orgAccount.setOrgType(OrgTypeEnum.POST.name());
+                    break;
+                default:
+            }
+            orgAccountMapper.insert(orgAccount);
+        });
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.cciet.biz.rbac.controller;
 
 import com.cciet.biz.rbac.api.IResApi;
 import com.cciet.biz.rbac.constant.ParentConstant;
+import com.cciet.biz.rbac.constant.StateEnum;
 import com.cciet.biz.rbac.dto.ResDTO;
 import com.cciet.biz.rbac.dto.ResQueryDTO;
 import com.cciet.biz.rbac.entity.Res;
@@ -36,7 +37,7 @@ public class ResController implements IResApi{
     }
 
     @Override
-    public Result<Boolean> state(Long id, String state) {
+    public Result<Boolean> state(Long id, StateEnum state) {
         return Result.ok(resService.state(id,state));
     }
 

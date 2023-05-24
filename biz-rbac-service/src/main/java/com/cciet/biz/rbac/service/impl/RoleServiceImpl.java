@@ -4,12 +4,17 @@ import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.text.CharSequenceUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.conditions.update.UpdateChainWrapper;
+import com.cciet.biz.rbac.constant.StateEnum;
 import com.cciet.biz.rbac.constant.errinfo.RoleInfo;
+import com.cciet.biz.rbac.dto.OrgRoleDTO;
 import com.cciet.biz.rbac.dto.RoleDTO;
 import com.cciet.biz.rbac.dto.RoleQueryDTO;
+import com.cciet.biz.rbac.entity.OrgRole;
 import com.cciet.biz.rbac.entity.Role;
+import com.cciet.biz.rbac.mapper.IOrgRoleMapper;
 import com.cciet.biz.rbac.mapper.IRoleMapper;
 import com.cciet.biz.rbac.service.IRoleService;
+import com.cciet.biz.rbac.vo.OrgRoleCurrentVO;
 import com.cciet.common.bean.PageRequest;
 import com.cciet.common.bean.PageResponse;
 import com.cciet.common.exception.BusinessException;
@@ -22,6 +27,7 @@ import org.springframework.util.CollectionUtils;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -37,13 +43,15 @@ public class RoleServiceImpl extends SupperServiceImpl<IRoleMapper, Role> implem
 
     @Resource
     IRoleMapper roleMapper;
+    @Resource
+    IOrgRoleMapper orgRoleMapper;
     @Override
     public RoleDTO getById(Long id) {
         return BeanUtil.copyProperties(this.getBaseMapper().selectById(id), RoleDTO.class);
     }
 
     @Override
-    public Boolean state(Long id, String state, String disableCause) {
+    public Boolean state(Long id, StateEnum state, String disableCause) {
         UpdateChainWrapper<Role> updateChainWrapper =  this.update();
         updateChainWrapper.set(Role.Columns.STOP_REASON, disableCause);
         updateChainWrapper.set(Role.Columns.STATE, state);
@@ -99,6 +107,36 @@ public class RoleServiceImpl extends SupperServiceImpl<IRoleMapper, Role> implem
         wrapper.eq(CharSequenceUtil.isNotBlank(roleQueryDTO.getCode()),Role::getCode,roleQueryDTO.getCode());
 
         return this.pageBeans(pageRequest,wrapper, RoleDTO.class);
+    }
+
+    @Override
+    public OrgRoleDTO saveOrgRole(OrgRoleDTO orgRoleDTO) {
+        //先清空OrgRole
+        LambdaQueryWrapper<OrgRole> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(OrgRole::getOrgId,orgRoleDTO.getOrgId());
+        orgRoleMapper.delete(queryWrapper);
+        if (!CollectionUtils.isEmpty(orgRoleDTO.getRoleId())){
+            orgRoleDTO.getRoleId().forEach(roleId ->{
+                OrgRole orgRole = new OrgRole();
+                orgRole.setOrgId(orgRoleDTO.getOrgId());
+                orgRole.setRoleId(roleId);
+                orgRoleMapper.insert(orgRole);
+            });
+        }
+        return orgRoleDTO;
+    }
+
+    @Override
+    public List<OrgRoleCurrentVO> getRolesByOrgId(Long orgId) {
+        //获取角色id
+        LambdaQueryWrapper<OrgRole> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(OrgRole::getOrgId,orgId).select(OrgRole::getRoleId);
+        List<Long> roleIds = orgRoleMapper.selectList(queryWrapper).stream().map(OrgRole::getRoleId).collect(Collectors.toList());
+        //获取角色信息
+        LambdaQueryWrapper<Role> roleQueryWrapper = new LambdaQueryWrapper<>();
+        roleQueryWrapper.in(Role::getId,roleIds);
+        List<Role> roles = roleMapper.selectList(roleQueryWrapper);
+        return BeanUtil.copyToList(roles, OrgRoleCurrentVO.class);
     }
 
     @Override

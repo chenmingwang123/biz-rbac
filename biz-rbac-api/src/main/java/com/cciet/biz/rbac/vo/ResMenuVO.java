@@ -5,10 +5,7 @@ import com.cciet.biz.rbac.constant.ResOpenWithEnum;
 import com.cciet.biz.rbac.constant.ResTypeEnum;
 import com.cciet.biz.rbac.constant.StateEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
@@ -21,8 +18,7 @@ import java.util.List;
  * @author cmw
  * @since 2023/05/23 09:47
  */
-@Setter
-@Getter
+@Data
 @Validated
 @NoArgsConstructor
 @AllArgsConstructor

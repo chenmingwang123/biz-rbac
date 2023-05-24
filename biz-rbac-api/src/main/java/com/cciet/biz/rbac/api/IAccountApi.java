@@ -1,6 +1,6 @@
 package com.cciet.biz.rbac.api;
 
-import com.cciet.biz.rbac.constant.AccountStateEnum;
+import com.cciet.biz.rbac.constant.StateEnum;
 import com.cciet.biz.rbac.dto.AccountDTO;
 import com.cciet.biz.rbac.dto.AccountQueryDTO;
 import com.cciet.biz.rbac.vo.AccountSummaryVO;
@@ -92,10 +92,10 @@ public interface IAccountApi {
     @PostMapping("/state")
     @Operation(summary = "根据ID更新账号状态", parameters = {
             @Parameter(name = "id", description = "ID", required = true),
-            @Parameter(name = "state", description = "账号状态", required = true, schema = @Schema(implementation = AccountStateEnum.class)),
+            @Parameter(name = "state", description = "账号状态", required = true,schema = @Schema(implementation = StateEnum.class)),
             @Parameter(name = "disableCause", description = "禁用原因")
     })
-    Result<Boolean> state(@RequestParam(value = "id") Long id, @RequestParam(value = "state") String state,
+    Result<Boolean> state(@RequestParam(value = "id") Long id, @RequestParam(value = "state") StateEnum state,
                           @RequestParam(value = "disableCause", required = false) String disableCause);
 
     /**

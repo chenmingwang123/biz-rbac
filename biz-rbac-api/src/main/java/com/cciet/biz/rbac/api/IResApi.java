@@ -51,9 +51,9 @@ public interface IResApi {
     @PostMapping("/state")
     @Operation(summary = "根据ID更新系统资源状态", parameters = {
             @Parameter(name = "id", description = "ID", required = true),
-            @Parameter(name = "state", description = "账号状态", required = true, schema = @Schema(implementation = StateEnum.class))
+            @Parameter(name = "state", description = "账号状态", required = true,schema = @Schema(implementation = StateEnum.class))
     })
-    Result<Boolean> state(@RequestParam(value = "id") Long id, @RequestParam(value = "state") String state);
+    Result<Boolean> state(@RequestParam(value = "id") Long id, @RequestParam(value = "state") StateEnum state);
 
     /**
      * 保存系统资源信息
@@ -64,6 +64,7 @@ public interface IResApi {
     @PostMapping("/save")
     @Operation(summary = "保存系统资源信息")
     Result<ResDTO> save(@RequestBody ResDTO resDTO);
+
 
     /**
      * 分页条件查询系统资源信息

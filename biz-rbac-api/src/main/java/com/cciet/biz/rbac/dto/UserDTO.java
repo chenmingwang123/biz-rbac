@@ -8,9 +8,7 @@ import org.springframework.validation.annotation.Validated;
  * @author huanghui
  * @since 2023/5/9 11:12
  */
-@Getter
-@Setter
-@Builder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "登录DTO")
@@ -22,11 +20,4 @@ public class UserDTO {
     @Schema(description = "密码")
     public String password;
 
-    @Override
-    public String toString() {
-        return "UserDTO{" +
-                "account='" + account + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 }

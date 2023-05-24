@@ -15,9 +15,4 @@ public enum StateEnum implements IEnum {
     DISABLE("停用"),
     ;
     String label;
-
-    @Override
-    public String toString() {
-        return this.name().concat(":").concat(label);
-    }
 }

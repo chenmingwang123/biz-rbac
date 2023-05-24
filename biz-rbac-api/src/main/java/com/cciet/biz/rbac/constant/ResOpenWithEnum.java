@@ -18,8 +18,4 @@ public enum ResOpenWithEnum implements IEnum {
     ;
     String label;
 
-    @Override
-    public String toString() {
-        return this.name().concat(":").concat(label);
-    }
 }

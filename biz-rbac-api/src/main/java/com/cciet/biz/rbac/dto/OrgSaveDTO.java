@@ -10,9 +10,7 @@ import javax.validation.constraints.NotBlank;
  * @author cmw
  * @since 2023/5/9 11:12
  */
-@Getter
-@Setter
-@Builder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Schema(description = "组织新增DTO")
@@ -47,15 +45,4 @@ public class OrgSaveDTO {
     @Schema(description = "组织路径")
     private String path;
 
-    @Override
-    public String toString() {
-        return "OrgSaveDTO{" +
-                "orgCode='" + orgCode + '\'' +
-                ", orgName='" + orgName + '\'' +
-                ", orgAbbreviation='" + orgAbbreviation + '\'' +
-                ", orgAbbreviationCode='" + orgAbbreviationCode + '\'' +
-                ", orgType='" + orgType + '\'' +
-                ", pid=" + pid +
-                '}';
-    }
 }

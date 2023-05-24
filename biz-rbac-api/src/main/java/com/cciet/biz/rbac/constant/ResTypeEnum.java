@@ -17,9 +17,4 @@ public enum ResTypeEnum implements IEnum {
     BUTTON("按钮")
     ;
     String label;
-
-    @Override
-    public String toString() {
-        return this.name().concat(":").concat(label);
-    }
 }

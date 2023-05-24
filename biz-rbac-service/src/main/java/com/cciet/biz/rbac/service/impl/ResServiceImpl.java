@@ -7,6 +7,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.conditions.update.UpdateChainWrapper;
 import com.cciet.biz.rbac.constant.ParentConstant;
+import com.cciet.biz.rbac.constant.StateEnum;
 import com.cciet.biz.rbac.constant.errinfo.ResInfo;
 import com.cciet.biz.rbac.dto.ResDTO;
 import com.cciet.biz.rbac.dto.ResQueryDTO;
@@ -56,7 +57,7 @@ public class ResServiceImpl extends SupperServiceImpl<IResMapper, Res> implement
     }
 
     @Override
-    public Boolean state(Long id, String state) {
+    public Boolean state(Long id, StateEnum state) {
         UpdateChainWrapper<Res> updateChainWrapper =  this.update();
         updateChainWrapper.set(Res.Columns.STATE, state);
         updateChainWrapper.eq(SupperEntity.Columns.ID,id);
@@ -84,15 +85,6 @@ public class ResServiceImpl extends SupperServiceImpl<IResMapper, Res> implement
                     resDTO.setPath(ParentConstant.appendPath(res.getPath(), resDTO.getId()));
                 }
             }
-            //新增角色关联
-            ResDTO finalResDTO = resDTO;
-            resDTO.getRoleIds().forEach(r ->{
-                RoleRes roleRes = new RoleRes();
-                roleRes.setResId(finalResDTO.getId());
-                roleRes.setRoleId(r);
-                roleResMapper.insert(roleRes);
-            });
-            return  saveOrUpdate(resDTO.getId(),resDTO);
         }else {
             LambdaQueryWrapper<Res> queryWrapper = new LambdaQueryWrapper<>();
             queryWrapper.eq(Res::getName,resDTO.getName());
@@ -105,17 +97,16 @@ public class ResServiceImpl extends SupperServiceImpl<IResMapper, Res> implement
             LambdaQueryWrapper<RoleRes> roleResLambdaQueryWrapper = new LambdaQueryWrapper<>();
             roleResLambdaQueryWrapper.eq(RoleRes::getResId,resDTO.getId());
             roleResMapper.delete(roleResLambdaQueryWrapper);
-
-            //新增角色关联
-            ResDTO finalResDTO = resDTO;
-            resDTO.getRoleIds().forEach(r ->{
-                RoleRes roleRes = new RoleRes();
-                roleRes.setResId(finalResDTO.getId());
-                roleRes.setRoleId(r);
-                roleResMapper.insert(roleRes);
-            });
-            return saveOrUpdate(resDTO.getId(),resDTO);
         }
+        //新增角色关联
+        ResDTO finalResDTO = resDTO;
+        resDTO.getRoleIds().forEach(r ->{
+            RoleRes roleRes = new RoleRes();
+            roleRes.setResId(finalResDTO.getId());
+            roleRes.setRoleId(r);
+            roleResMapper.insert(roleRes);
+        });
+        return  saveOrUpdate(resDTO.getId(),resDTO);
     }
 
     @Override

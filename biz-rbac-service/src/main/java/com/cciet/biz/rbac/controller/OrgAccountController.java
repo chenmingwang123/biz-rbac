@@ -1,19 +1,19 @@
 package com.cciet.biz.rbac.controller;
 
-import com.cciet.biz.rbac.api.IAccountRoleApi;
+import com.cciet.biz.rbac.api.IOrgAccountApi;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
 * <p>
-* 账号角色关联表 前端控制器
+* 组织账号关联表 前端控制器
 * </p>
 *
 * @author cmw
-* @since 2023/05/23 09:47
+* @since 2023/05/24 10:24
 */
 @RestController
-@RequestMapping("/rbac/account-role")
-public class AccountRoleController implements IAccountRoleApi{
+@RequestMapping("/rbac/org-account")
+public class OrgAccountController implements IOrgAccountApi{
 
 }

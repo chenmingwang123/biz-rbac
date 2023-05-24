@@ -16,9 +16,4 @@ public enum AccountStateEnum implements IEnum {
     LOCK("锁定")
     ;
     String label;
-
-    @Override
-    public String toString() {
-        return this.name().concat(":").concat(label);
-    }
 }

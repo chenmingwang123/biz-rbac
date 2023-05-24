@@ -38,8 +38,6 @@ public class LogInterpret {
         //创建token
         TokenContent content = new TokenContent();
         content.setAccountName(account.getAccountName());
-        content.setDeptId(account.getDepId());
-        content.setOrgId(account.getOrgId());
         content.setUserId(account.getId());
         TokenVo token = TokenUtil.createUserToken(content);
         log.debug("登录成功：{}",token);

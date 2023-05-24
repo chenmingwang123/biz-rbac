@@ -88,7 +88,8 @@ public class LoginLock implements ILoginLock {
         updateWrapper.eq(Account::getAccountName,accountName).set(Account::getPasswordErrorCount,account.getPasswordErrorCount()+1);
         //最后一次登录锁定账号
         if ((account.getPasswordErrorCount()+1) % loginErrorLimit == 0){
-            updateWrapper.set(Account::getState, AccountStateEnum.LOCK.name()).set(Account::getAutoActivationTime,DateUtil.offsetDay(new Date(), 1));
+            updateWrapper.set(Account::getState, AccountStateEnum.LOCK.name()).set(Account::getLockTime,new Date())
+                    .set(Account::getAutoActivationTime,DateUtil.offsetDay(new Date(), 1));
         }
         accountMapper.update(null,updateWrapper);
     }

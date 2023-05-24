@@ -1,0 +1,16 @@
+common:
+  token:
+    privateKey: 'MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAI5aSaK/E5+X8fbsnM0Ct8EYQorxBbTARg2v1PIdyTqeEHnq/EW67lcPahC5YNQU0sHXUZfZv8nOYrMNoafX40TKX/aU2qFwAQRzhet5QpznDnLRkL3SNPyeMNHwysce+QsVHPiQKuChDxdWOy/yPxVIbVS25LtKYvDxjG4URy6LAgMBAAECgYAxnx1+ArdXcYLh/Tbna+QcBlXj0wKXMFL7IGjNgT6NFV5O8W/A6tl8NZ5WeBhdtWiGM4V4tmnZcf0Lx1urg2DwKrDAN7rCbk1DOjhy2OdV2W9wEEK9r7LZndnqOW+xpI3ZiD7uXpM9cmIeajE4OZrd9pUhvKlNbV/WNB6SdG/wsQJBANgsvnSCLD7EckSp1g16R7gyUaELxTHjKeO8haRehOxsl1507L6DpjeZ3Ech5QANZ8R+NiahoVJ0+m5Br2bLyLkCQQCok/BYykk7DnPdk0n+0zSNyyLF3+K8cMgbwsXBg8pKfYCWi9KbXWF1LEsdFoJOMaNHf9F65zNPCqqGmal0F4djAkAD72SUKF530gmmeFT+L9CoaLoVrWosi08S5zajlFjlGOD0hjpdCXZ4IqPg45wQkS3nZMjFkUGnh5ubcDSqMWF5AkEAhaBG+0rVw49QPsoa9Hichu0HkkxG4VKQ/Jhmw19hQay7+hm5htf9gbDrlZIbFjp4kBt8hGyyGix9QZaaYOCpuwJAP9YZrT96Vpvx/RFZHp1aNEKAs4z2ikVFXtyQUzdqmiRmZ4ZZzIKOpG8RX0OjBR6tusqJaPC6FmVxE0FsUQ3sfA=='
+    publicKey: 'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCOWkmivxOfl/H27JzNArfBGEKK8QW0wEYNr9TyHck6nhB56vxFuu5XD2oQuWDUFNLB11GX2b/JzmKzDaGn1+NEyl/2lNqhcAEEc4XreUKc5w5y0ZC90jT8njDR8MrHHvkLFRz4kCrgoQ8XVjsv8j8VSG1UtuS7SmLw8YxuFEcuiwIDAQAB'
+    # 一周 单位分钟
+    userExpires: 10080
+    # 8天 单位分钟
+    userRefreshExpires: 11520
+    # 30天  单位分钟
+    secretExpires: 43200
+    # 31天  单位分钟
+    secretRefreshExpires: 44640
+    # 370天 单位分钟
+    systemExpires: 532800
+    # 380天 单位分钟
+    systemRefreshExpires: 547200
