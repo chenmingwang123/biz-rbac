@@ -27,7 +27,7 @@ import java.util.List;
 * @since 2023/05/23 09:47
 */
 @Validated
-@Tag(name = "系统资源表")
+@Tag(name = "系统资源")
 public interface IResApi {
 
     /**

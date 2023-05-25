@@ -2,7 +2,10 @@ package com.cciet.biz.rbac.controller;
 
 import com.cciet.biz.rbac.api.IResWhiteListApi;
 import com.cciet.biz.rbac.dto.ResWhiteListDTO;
+import com.cciet.biz.rbac.dto.ResWhiteListQueryDTO;
 import com.cciet.biz.rbac.service.IResWhiteListService;
+import com.cciet.common.bean.PageRequest;
+import com.cciet.common.bean.PageResponse;
 import com.cciet.common.bean.Result;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +30,11 @@ public class ResWhiteListController implements IResWhiteListApi{
     @Override
     public Result<ResWhiteListDTO> saveWhiteList(ResWhiteListDTO resWhiteListDTO) {
         return Result.ok(resWhiteListService.saveWhiteList(resWhiteListDTO));
+    }
+
+    @Override
+    public Result<PageResponse<ResWhiteListDTO>> page(PageRequest<ResWhiteListQueryDTO> pageRequest) {
+        return Result.ok(resWhiteListService.page(pageRequest));
     }
 
     @Override

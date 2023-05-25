@@ -1,6 +1,9 @@
 package com.cciet.biz.rbac.api;
 
 import com.cciet.biz.rbac.dto.ResWhiteListDTO;
+import com.cciet.biz.rbac.dto.ResWhiteListQueryDTO;
+import com.cciet.common.bean.PageRequest;
+import com.cciet.common.bean.PageResponse;
 import com.cciet.common.bean.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -21,7 +24,7 @@ import java.util.Set;
 * @since 2023/05/24 18:08
 */
 @Validated
-@Tag(name = "系统资源白名单表")
+@Tag(name = "系统资源白名单")
 public interface IResWhiteListApi {
 
     /**
@@ -33,6 +36,16 @@ public interface IResWhiteListApi {
     @PostMapping("/saveWhiteList")
     @Operation(summary = "保存系统资源信息")
     Result<ResWhiteListDTO> saveWhiteList(@RequestBody ResWhiteListDTO resWhiteListDTO);
+
+    /**
+     * 分页条件查询系统资源白名单
+     *
+     * @param pageRequest PageRequest<ResWhiteListQueryDTO>
+     * @return Result<PageResponse < ResWhiteListDTO>>
+     */
+    @PostMapping("/page")
+    @Operation(summary = "分页条件查询系统资源白名单")
+    Result<PageResponse<ResWhiteListDTO>> page(@RequestBody PageRequest<ResWhiteListQueryDTO> pageRequest);
 
     /**
      * 根据ID逻辑删除账号信息

@@ -134,7 +134,8 @@ public class RoleServiceImpl extends SupperServiceImpl<IRoleMapper, Role> implem
         List<Long> roleIds = orgRoleMapper.selectList(queryWrapper).stream().map(OrgRole::getRoleId).collect(Collectors.toList());
         //获取角色信息
         LambdaQueryWrapper<Role> roleQueryWrapper = new LambdaQueryWrapper<>();
-        roleQueryWrapper.in(Role::getId,roleIds);
+        roleQueryWrapper.eq(CollectionUtils.isEmpty(roleIds),Role::getId,-1);
+        roleQueryWrapper.in(!CollectionUtils.isEmpty(roleIds),Role::getId,roleIds);
         List<Role> roles = roleMapper.selectList(roleQueryWrapper);
         return BeanUtil.copyToList(roles, OrgRoleCurrentVO.class);
     }

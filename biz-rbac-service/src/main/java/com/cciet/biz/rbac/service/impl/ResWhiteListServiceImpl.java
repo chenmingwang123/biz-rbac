@@ -1,9 +1,14 @@
 package com.cciet.biz.rbac.service.impl;
 
+import cn.hutool.core.text.CharSequenceUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.cciet.biz.rbac.dto.ResWhiteListDTO;
+import com.cciet.biz.rbac.dto.ResWhiteListQueryDTO;
 import com.cciet.biz.rbac.entity.ResWhiteList;
 import com.cciet.biz.rbac.mapper.IResWhiteListMapper;
 import com.cciet.biz.rbac.service.IResWhiteListService;
+import com.cciet.common.bean.PageRequest;
+import com.cciet.common.bean.PageResponse;
 import com.cciet.mybatis.supers.SupperServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -26,6 +31,17 @@ public class ResWhiteListServiceImpl extends SupperServiceImpl<IResWhiteListMapp
     public ResWhiteListDTO saveWhiteList(ResWhiteListDTO resWhiteListDTO) {
         saveOrUpdate(resWhiteListDTO.getId(),resWhiteListDTO);
         return saveOrUpdate(resWhiteListDTO.getId(),resWhiteListDTO);
+    }
+
+    @Override
+    public PageResponse<ResWhiteListDTO> page(PageRequest<ResWhiteListQueryDTO> pageRequest) {
+        ResWhiteListQueryDTO whiteListQueryDTO =  pageRequest.getQuery();
+        LambdaQueryWrapper<ResWhiteList> wrapper = lambdaQueryWrapper();
+        wrapper.orderByDesc(ResWhiteList::getCreateTime);
+        wrapper.orderByDesc(ResWhiteList::getId);
+        wrapper.like(CharSequenceUtil.isNotBlank(whiteListQueryDTO.getName()),ResWhiteList::getName,whiteListQueryDTO.getName());
+
+        return this.pageBeans(pageRequest,wrapper, ResWhiteListDTO.class);
     }
 
     @Override

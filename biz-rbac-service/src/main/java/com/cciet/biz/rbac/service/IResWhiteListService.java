@@ -1,7 +1,10 @@
 package com.cciet.biz.rbac.service;
 
 import com.cciet.biz.rbac.dto.ResWhiteListDTO;
+import com.cciet.biz.rbac.dto.ResWhiteListQueryDTO;
 import com.cciet.biz.rbac.entity.ResWhiteList;
+import com.cciet.common.bean.PageRequest;
+import com.cciet.common.bean.PageResponse;
 import com.cciet.mybatis.supers.ISupperService;
 
 import java.util.Set;
@@ -22,6 +25,14 @@ public interface IResWhiteListService extends ISupperService<ResWhiteList> {
      * @return
      */
     ResWhiteListDTO saveWhiteList(ResWhiteListDTO resWhiteListDTO);
+
+    /**
+     * 分页条件查询系统资源白名单
+     *
+     * @param pageRequest PageRequest<ResWhiteListQueryDTO>
+     * @return PageResponse<ResWhiteListDTO>
+     */
+    PageResponse<ResWhiteListDTO> page(PageRequest<ResWhiteListQueryDTO> pageRequest);
 
     /**
      * 根据id逻辑删除白名单

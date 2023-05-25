@@ -49,17 +49,20 @@ public class Permission implements IPermission {
             }
             //查询岗位角色
             LambdaQueryWrapper<OrgRole> orgRoleQueryWrapper = new LambdaQueryWrapper<>();
-            orgRoleQueryWrapper.in(OrgRole::getOrgId,orgIds).select(OrgRole::getRoleId);
+            orgRoleQueryWrapper.eq(CollectionUtils.isEmpty(orgIds),OrgRole::getId,-1);
+            orgRoleQueryWrapper.in(!CollectionUtils.isEmpty(orgIds),OrgRole::getOrgId,orgIds).select(OrgRole::getRoleId);
             List<Long> roleIds = orgRoleMapper.selectList(orgRoleQueryWrapper).stream().map(OrgRole::getRoleId).collect(Collectors.toList());
             //获取角色访问资源
             if (!CollectionUtils.isEmpty(roleIds)){
                 LambdaQueryWrapper<RoleRes> roleResQueryWrapper = new LambdaQueryWrapper<>();
-                roleResQueryWrapper.in(RoleRes::getRoleId,roleIds).select(RoleRes::getResId);
+                roleResQueryWrapper.eq(CollectionUtils.isEmpty(roleIds),RoleRes::getId,-1);
+                roleResQueryWrapper.in(!CollectionUtils.isEmpty(roleIds),RoleRes::getRoleId,roleIds).select(RoleRes::getResId);
                 Set<Long> resIds = roleResMapper.selectList(roleResQueryWrapper).stream().map(RoleRes::getResId).collect(Collectors.toSet());
                 //获取具体访问url
                 if (!CollectionUtils.isEmpty(resIds)){
                     LambdaQueryWrapper<Res> resQueryWrapper = new LambdaQueryWrapper<>();
-                    resQueryWrapper.in(Res::getId,resIds).select(Res::getAddress);
+                    resQueryWrapper.eq(CollectionUtils.isEmpty(resIds),Res::getId,-1);
+                    resQueryWrapper.in(!CollectionUtils.isEmpty(resIds),Res::getId,resIds).select(Res::getAddress);
                     List<String> addressList = resMapper.selectList(resQueryWrapper).stream().map(Res::getAddress).collect(Collectors.toList());
                     //url匹配上，有权访问
                     if(addressList.stream().anyMatch((u -> antPathMatcher.match(u, url)))){

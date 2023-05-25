@@ -111,7 +111,7 @@ public class AccountServiceImpl extends SupperServiceImpl<IAccountMapper, Accoun
         UpdateChainWrapper<Account> updateChainWrapper =  this.update();
         updateChainWrapper.set(Account.Columns.DEACTIVATE_REASON, disableCause);
         updateChainWrapper.set(Account.Columns.STATE, state);
-        if (AccountStateEnum.DISABLE.name().equals(state)){
+        if (StateEnum.DISABLE==state){
             updateChainWrapper.set(Account.Columns.DISABLE_TIME, new Date());
         }
         updateChainWrapper.eq(SupperEntity.Columns.ID,id);
@@ -147,6 +147,7 @@ public class AccountServiceImpl extends SupperServiceImpl<IAccountMapper, Accoun
      */
     private void saveOrgAccount(AccountDTO accountDto) {
         LambdaQueryWrapper<OrgStruct> orgQueryWrapper = new LambdaQueryWrapper<>();
+        orgQueryWrapper.eq(CollectionUtils.isEmpty(accountDto.getOrgId()), OrgStruct::getId,-1);
         orgQueryWrapper.in(!CollectionUtils.isEmpty(accountDto.getOrgId()),OrgStruct::getId, accountDto.getOrgId());
         List<OrgStruct> orgStructs = orgStructMapper.selectList(orgQueryWrapper);
         //获取是组织类型
