@@ -1,38 +1,53 @@
+---
 kind: pipeline
-type: docker
-name: rbac1
+name: drone
+
 workspace:
-  base: /data/service
-  path: .
+  base: /app
+  path: git/drone
+
 steps:
-  - name: 部署rbac项目
-    image: appleboy/drone-ssh
+  - name: build
+    image: node:alpine
+    volumes:
+      - name: webroot
+        path: /wwwroot
+    commands:
+      - /bin/sh bash.sh
+    environment:
+      host:
+        from_secret: host
+      port:
+        from_secret: port
+      abc: abctest
+  - name: deploy
+    image: appleboy/drone-scp
+    when:
+      status:
+        - success
     settings:
       host:
         from_secret: host
       port:
         from_secret: port
+      key:
+        from_secret: rsa
       username:
         from_secret: username
-      password:
-        from_secret: rsa
       target:
-        from_secret: /var/www/myapp/
+        from_secret: /var/www/myapp
       source: ./*
-      volumes:
-        - name: webroot
-          host:
-            path: /opt
-        - name: cache
-          host:
-            path: /tmp/cache
-      script:
-        - cd /var/www/myapp/
-        - pwd && ls -l
-        - git pull origin master
-        - rm -rf dist/*
-        - cnpm run build
-        - pwd && ls -l
-        - docker build -t rbac:v1 .
-        - docker rm -f rbac || true
-        - docker run -d --rm --name rbac -p 8002:80 rbac:v1
+
+volumes:
+  - name: webroot
+    host:
+      path: /opt
+  - name: cache
+    host:
+      path: /tmp/cache
+
+trigger:
+  branch:
+    - master
+  event:
+    - push
