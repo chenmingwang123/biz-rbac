@@ -1,56 +1,42 @@
-
 ---
-
 kind: pipeline
-
-type: docker
-
-name: api-ui
-
+name: drone
 workspace:
-
-  base: /data/service
-
-  path: .
-
+  base: /app
+  path: git/drone
 steps:
-
-  - name: 部署api-ui项目
-
+  - name: build
     image: appleboy/drone-ssh
-
-    settings:
-
+    volumes:
+      - name: webroot
+        path: /wwwroot
+    commands:
+      - /bin/sh bash.sh
+    environment:
       host:
-
         from_secret: host
-
-      port: 22
-
-      username:
-
-        from_secret: username
-
-      password:
-
+      port:
+        from_secret: port
+      abc: abctest
+  - name: deploy
+    image: appleboy/drone-scp
+    when:
+      status:
+        - success
+    settings:
+      host:
+        from_secret: host
+      port:
+        from_secret: port
+      key:
         from_secret: rsa
-
-      script:
-
-        - cd /var/www/myapp
-
-        - pwd && ls -l
-
-        - git pull origin master
-
-        - rm -rf dist/*
-
-        - cnpm run build
-
-        - pwd && ls -l
-
-        - docker build -t api-ui:v1 .
-
-        - docker rm -f api-ui || true
-
-        - docker run -d --rm --name api-ui -p 80:80 api-ui:v1
+      username:
+        from_secret: username
+      target:
+        from_secret: deploy_path
+      source: ./*
+trigger:
+  branch:
+    - master
+  event:
+    - push
