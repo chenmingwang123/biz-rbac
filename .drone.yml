@@ -6,7 +6,7 @@ workspace:
   path: git/drone
 steps:
   - name: build
-    image: node:alpine
+    image: appleboy/drone-ssh
     volumes:
       - name: webroot
         path: /wwwroot
