@@ -1,56 +1,27 @@
-
----
-
 kind: pipeline
-
 type: docker
-
 name: api-ui
-
 workspace:
-
   base: /data/service
-
   path: .
-
 steps:
-
   - name: 部署api-ui项目
-
     image: appleboy/drone-ssh
-
     settings:
-
       host:
-
         from_secret: host
-
       port: port
-
       username:
-
         from_secret: username
-
       password:
-
         from_secret: rsa
-
       script:
-
         - cd /var/www/myapp
-
         - pwd && ls -l
-
         - git pull origin master
-
         - rm -rf dist/*
-
         - cnpm run build
-
         - pwd && ls -l
-
         - docker build -t api-ui:v1 .
-
         - docker rm -f api-ui || true
-
         - docker run -d --rm --name api-ui -p 80:80 api-ui:v1
