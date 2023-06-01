@@ -49,13 +49,13 @@ trigger:
     - master
   event:
     - push
-script:
-  - cd /var/www/myapp/
-  - pwd && ls -l
-  - git pull origin master
-  - rm -rf dist/*
-  - cnpm run build
-  - pwd && ls -l
-  - docker build -t rbac:v1 .
-  - docker rm -f rbac || true
-  - docker run -d --rm --name rbac -p 8002:80 rbac:v1
+#script:
+#  - cd /var/www/myapp/
+#  - pwd && ls -l
+#  - git pull origin master
+#  - rm -rf dist/*
+#  - cnpm run build
+#  - pwd && ls -l
+#  - docker build -t rbac:v1 .
+#  - docker rm -f rbac || true
+#  - docker run -d --rm --name rbac -p 8002:80 rbac:v1
