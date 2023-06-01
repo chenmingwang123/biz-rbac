@@ -17,7 +17,7 @@ steps:
       password:
         from_secret: rsa
       script:
-        - cd /var/www/myapp
+        - cd /home/xxxxxx/www/rbac/
         - pwd && ls -l
         - git pull origin master
         - rm -rf dist/*
