@@ -35,13 +35,6 @@ steps:
       target:
         from_secret: deploy_path
       source: ./*
-volumes:
-  - name: webroot
-    host:
-      path: /opt
-  - name: cache
-    host:
-      path: /tmp/cache
 trigger:
   branch:
     - master
