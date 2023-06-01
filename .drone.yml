@@ -16,6 +16,13 @@ steps:
         from_secret: username
       password:
         from_secret: rsa
+      volumes:
+        - name: webroot
+          host:
+            path: /opt
+        - name: cache
+          host:
+            path: /tmp/cache
       script:
         - cd /home/xxxxxx/www/rbac/
         - pwd && ls -l
