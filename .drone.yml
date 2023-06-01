@@ -11,7 +11,7 @@ steps:
       host:
         from_secret: host
       port:
-        from_secret: port
+        from_secret: 22
       username:
         from_secret: username
       password:
