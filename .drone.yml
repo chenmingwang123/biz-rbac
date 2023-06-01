@@ -6,12 +6,12 @@ workspace:
   path: git/drone
 steps:
   - name: build
-    image: appleboy/drone-ssh
+    image: node:alpine
     volumes:
       - name: webroot
         path: /wwwroot
-    commands:
-      - /bin/sh bash.sh
+#    commands:
+#      - /bin/sh bash.sh
     environment:
       host:
         from_secret: host
