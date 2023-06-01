@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: rbac
+name: rbac1
 workspace:
   base: /data/service
   path: .
