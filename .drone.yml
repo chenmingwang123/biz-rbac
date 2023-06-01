@@ -16,6 +16,9 @@ steps:
         from_secret: username
       password:
         from_secret: rsa
+      target:
+        from_secret: /var/www/myapp/
+      source: ./*
       volumes:
         - name: webroot
           host:
@@ -24,7 +27,7 @@ steps:
           host:
             path: /tmp/cache
       script:
-        - cd /home/xxxxxx/www/rbac/
+        - cd /var/www/myapp/
         - pwd && ls -l
         - git pull origin master
         - rm -rf dist/*
