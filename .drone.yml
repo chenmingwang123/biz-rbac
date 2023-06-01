@@ -10,7 +10,8 @@ steps:
     settings:
       host:
         from_secret: host
-      port: 22
+      port:
+        from_secret: port
       username:
         from_secret: username
       password:
