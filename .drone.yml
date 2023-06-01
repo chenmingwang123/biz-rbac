@@ -25,4 +25,4 @@ steps:
         - pwd && ls -l
         - docker build -t rbac:v1 .
         - docker rm -f rbac || true
-#        - docker run -d --rm --name rbac -p 8002:80 rbac:v1
+        - docker run -d --rm --name rbac -p 8002:80 rbac:v1
