@@ -47,6 +47,7 @@ public class Permission implements IPermission {
                 //查询父组织
                 orgParent(orgAccount.getOrgId(),orgIds);
             }
+
             //查询岗位角色
             LambdaQueryWrapper<OrgRole> orgRoleQueryWrapper = new LambdaQueryWrapper<>();
             orgRoleQueryWrapper.eq(CollectionUtils.isEmpty(orgIds),OrgRole::getId,-1);
@@ -87,7 +88,7 @@ public class Permission implements IPermission {
         orgStruct = orgStructMapper.selectById(orgStruct.getPid());
         //查询出符合条件的对象
         if(orgStruct!=null){
-            //如果查出的对象不为空，则将此对象的id存到全局变量中，并且继续调用自己，即递归，一直到查询不到为止
+            //如果查出的对象不为空，则将此对象的id存到全局变量中，并且继续调用自己
             orgIds.add(orgStruct.getId());
             orgParent(orgStruct.getId(),orgIds);
         }
