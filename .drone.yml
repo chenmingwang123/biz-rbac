@@ -32,7 +32,7 @@ steps:
         - rm -rf dist/*
         - pwd && ls -l
         - docker build -t biz-rbac-service:0.0.1 .
-#        - docker rm -f biz-rbac-service || true
-        - docker run -d --name biz-rbac-service -p 8002:80 biz-rbac-service:0.0.1
+        - docker rm -f biz-rbac-service || true
+        - docker run -d --name biz-rbac-service -p 8002:8002 biz-rbac-service:0.0.1
         - echo "endx"
 
