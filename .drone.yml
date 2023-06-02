@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: rbac1
+name: rbac
 workspace:
   base: /data/service
   path: .
@@ -31,8 +31,8 @@ steps:
         - pwd && ls -l
         - rm -rf dist/*
         - pwd && ls -l
-        - docker build -t rbac:v1 .
-        - docker rm -f rbac || true
-        - docker run -d --rm --name rbac -p 8002:80 rbac:v1
+        - docker build -t biz-rbac-service:v1 .
+        - docker rm -f biz-rbac-service || true
+        - docker run -d --rm --name biz-rbac-service -p 8002:80 biz-rbac-service:v1
         - echo "endx"
 
