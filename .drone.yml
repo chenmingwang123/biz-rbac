@@ -33,5 +33,5 @@ steps:
         - pwd && ls -l
         - docker build -t biz-rbac-service:0.0.1 .
         - docker rm -f biz-rbac-service || true
-        - docker run -d --rm --name biz-rbac-service -p 8002:80 biz-rbac-service:0.0.1
+        - docker run -d --rm --name compose-test_biz-rbac-service_1 -p 8002:80 biz-rbac-service:0.0.1
 
