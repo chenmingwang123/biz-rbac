@@ -47,7 +47,6 @@ public class Permission implements IPermission {
                 //查询父组织
                 orgParent(orgAccount.getOrgId(),orgIds);
             }
-
             //查询岗位角色
             LambdaQueryWrapper<OrgRole> orgRoleQueryWrapper = new LambdaQueryWrapper<>();
             orgRoleQueryWrapper.eq(CollectionUtils.isEmpty(orgIds),OrgRole::getId,-1);
