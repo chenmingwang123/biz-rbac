@@ -26,15 +26,30 @@ steps:
         - name: cache
           host:
             path: /var/www/myapp
-      commands: # 定义在Docker容器中执行的shell命令
-        - mvn clean package # 应用打包命令
-        - cp biz-rbac-service-1.0.0.jar /var/www/myapp/biz-rbac-service-1.0.0.jar
-        - cp Dockerfile /var/www/myapp/Dockerfile
-        - cp run.sh /var/www/myapp/run.sh
+#      commands: # 定义在Docker容器中执行的shell命令
+#        - mvn clean package # 应用打包命令
+#        - cp biz-rbac-service-1.0.0.jar /var/www/myapp/biz-rbac-service-1.0.0.jar
+#        - cp Dockerfile /var/www/myapp/Dockerfile
+#        - cp run.sh /var/www/myapp/run.sh
       script:
         - cd /var/www/myapp/
-        - chmod +x run.sh # 更改为可执行脚本
-        - ./run.sh
+#        - chmod +x run.sh # 更改为可执行脚本
+#        - ./run.sh
+        - echo '----copy jar----'
+        - docker stop compose-test_biz-rbac-service_1
+        - echo '----stop container----'
+        - docker rm compose-test_biz-rbac-service_1
+        # echo '----rm container----'
+        # docker rmi compose-test_biz-rbac-service_1
+        - echo '----rm image----'
+        # 打包编译docker镜像
+        - docker build -t biz-rbac-service:1.0.0 .
+        - echo '----build image----'
+        - docker run -p 8002:8002 --name biz-rbac-service:0.0.1 \
+        - e TZ="Asia/Shanghai" \
+        - v /etc/localtime:/etc/localtime \
+        - d biz-rbac-service-0.0.1
+        - echo '----start container----'
 #        - mvn clean package
 #        - echo "package ok!!"
 #        - pwd && ls -l
