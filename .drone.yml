@@ -22,8 +22,8 @@ steps:
       volumes:
         - name: webroot
           host:
-            path: /opt
-        - name: cache
+            path: /root/.m2
+        - name: maven-build
           host:
             path: /var/www/myapp
 #      commands: # 定义在Docker容器中执行的shell命令
