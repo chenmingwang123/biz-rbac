@@ -45,7 +45,7 @@ steps:
         # 打包编译docker镜像
         - docker build -t biz-rbac-service:1.0.0 .
         - echo '----build image----'
-        - docker run -p 8002:8002 --name biz-rbac-service:0.0.1 \
+        - docker run -d --name biz-rbac-service -p 8002:8002 biz-rbac-service:0.0.1
         - e TZ="Asia/Shanghai" \
         - v /etc/localtime:/etc/localtime \
         - d biz-rbac-service-0.0.1
