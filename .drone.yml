@@ -6,7 +6,7 @@ workspace:
   path: .
 steps:
   - name: 部署rbac项目
-    image: maven:3.6-openjdk-8
+    image: appleboy/drone-ssh
     settings:
       host:
         from_secret: host
