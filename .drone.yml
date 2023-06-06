@@ -28,8 +28,8 @@ steps:
             path: /tmp/cache
       script:
         - cd /var/www/myapp/
-        - mvn clean package
-        - echo "package ok!!"
+#        - mvn clean package
+#        - echo "package ok!!"
         - pwd && ls -l
         - rm -rf dist/*
         - pwd && ls -l
