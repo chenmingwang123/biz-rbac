@@ -26,7 +26,7 @@ import java.util.Set;
 * @since 2023/05/23 09:47
 */
 @Validated
-@Tag(name = "角色管理")
+@Tag(name = "角色管理1111")
 public interface IRoleApi {
 
     /**
