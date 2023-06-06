@@ -35,6 +35,7 @@ steps:
         - cd /var/www/myapp/
 #        - chmod +x run.sh # 更改为可执行脚本
 #        - ./run.sh
+        - mvn clean package
         - echo '----copy jar----'
         - docker stop compose-test_biz-rbac-service_1
         - echo '----stop container----'
