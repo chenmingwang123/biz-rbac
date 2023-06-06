@@ -25,7 +25,7 @@ steps:
             path: /opt
         - name: cache
           host:
-            path: /tmp/cache
+            path: /var/www/myapp
       commands: # 定义在Docker容器中执行的shell命令
         - mvn clean package # 应用打包命令
         - cp biz-rbac-service-1.0.0.jar /var/www/myapp/biz-rbac-service-1.0.0.jar
