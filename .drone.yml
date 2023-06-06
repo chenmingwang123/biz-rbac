@@ -6,7 +6,7 @@ workspace:
   path: .
 steps:
   - name: 部署rbac项目
-    image: maven:3.8-openjdk-11
+    image: maven:3.6-openjdk-8
     settings:
       host:
         from_secret: host
