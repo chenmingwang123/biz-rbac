@@ -28,7 +28,7 @@ steps:
             path: /var/www/myapp
       script:
         - cd /var/www/myapp/
-        #脚本打包部署
+        #脚本打包部署(mave有私有仓库，打包报错，未解决)
 #        - mvn clean package
 #        - echo "package ok!!"
 #        - echo '----copy jar----'
