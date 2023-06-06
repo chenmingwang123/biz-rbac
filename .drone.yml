@@ -26,15 +26,22 @@ steps:
         - name: cache
           host:
             path: /tmp/cache
+      commands: # 定义在Docker容器中执行的shell命令
+        - mvn clean package # 应用打包命令
+        - cp biz-rbac-service-1.0.0.jar /var/www/myapp/biz-rbac-service-1.0.0.jar
+        - cp Dockerfile /var/www/myapp/Dockerfile
+        - cp run.sh /var/www/myapp/run.sh
       script:
         - cd /var/www/myapp/
-        - mvn clean package
-        - echo "package ok!!"
-        - pwd && ls -l
-        - rm -rf dist/*
-        - pwd && ls -l
-        - docker build -t biz-rbac-service:0.0.1 .
-        - docker rm -f biz-rbac-service || true
-        - docker run -d --name biz-rbac-service -p 8002:8002 biz-rbac-service:0.0.1
+        - chmod +x run.sh # 更改为可执行脚本
+        - ./run.sh
+#        - mvn clean package
+#        - echo "package ok!!"
+#        - pwd && ls -l
+#        - rm -rf dist/*
+#        - pwd && ls -l
+#        - docker build -t biz-rbac-service:0.0.1 .
+#        - docker rm -f biz-rbac-service || true
+#        - docker run -d --name biz-rbac-service -p 8002:8002 biz-rbac-service:0.0.1
         - echo "endx"
 
